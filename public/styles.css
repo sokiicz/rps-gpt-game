@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+
+.game-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+canvas {
+    display: block;
+    margin: 20px auto;
+    border: 1px solid #000;
+}
+
+button {
+    display: block;
+    margin: 10px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.game-container {
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+    border: 1px solid #d1d8e0;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 540px;
+    text-align: center;
+}
+
+#gameCanvas {
+    background: #e0e8f0;
+    border: 1px solid #d1d8e0;
+    display: block;
+    margin: 20px auto;
+}
+
+.team-button {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.team-button:hover {
+    background-color: #e0e8f0;
+}
+
+#scoreboard {
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.team-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.team-button {
+    font-size: 24px;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: 1px solid #d1d8e0;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    background-color: #e0e8f0;
+    color: black;
+}
+
+.team-button.selected {
+    background-color: #007bff;
+    color: #fff;
+    border-color: #0056b3;
+}
+
+.team-button:hover {
+    background-color: #d1d8e0;
+}
+
+
