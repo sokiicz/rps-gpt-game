@@ -28,26 +28,6 @@ players.push(player);
 players = players.filter(p => p.id !== socket.id);
     });
 });
-socket.on('selectTeam', (team) => {
-    let player = players.find(p => p.id === socket.id);
-    if (player) {
-        player.team = team;
-        // Check if we have three players with different teams
-        let rockPlayer = players.find(p => p.team === "rock");
-        let paperPlayer = players.find(p => p.team === "paper");
-        let scissorsPlayer = players.find(p => p.team === "scissors");
-        if (rockPlayer && paperPlayer && scissorsPlayer) {
-            // Start a new game
-            let newGame = {
-                id: Date.now(),
-                players: [rockPlayer, paperPlayer, scissorsPlayer]
-            };
-            games.push(newGame);
-            io.emit('startGame', newGame.id);
-        }
-    }
-});
-
 
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
