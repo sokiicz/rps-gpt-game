@@ -57,13 +57,11 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 
 io.on('connection', (socket) => {
-    io.on('connection', (socket) => {
         socket.on('startGame', () => {
             const minions = initializeMinions(width, height, 10);
             socket.emit('gameData', minions);
             setInterval(() => updateAndSyncGameState(newGame.id), 100);
-        });
-    });    
+        });    
     
     console.log('A user connected');
     let player = {
