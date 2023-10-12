@@ -1,5 +1,25 @@
 let gameInterval;
 
+function getStats() {
+    const stats = localStorage.getItem('rpsStats');
+    if (stats) {
+        return JSON.parse(stats);
+    }
+    return { wins: 0, losses: 0 };
+}
+
+function setStats(wins, losses) {
+    localStorage.setItem('rpsStats', JSON.stringify({ wins, losses }));
+}
+
+function updateLossCount() {
+    const stats = getStats();
+    stats.losses += 1;
+    setStats(stats.wins, stats.losses);
+    updateScoreboard();  // Assuming you have this function to update the scoreboard
+}
+
+
 // Get randomness
 function getRandomInt(min, max) {
     const byteArray = new Uint32Array(1);
@@ -141,8 +161,11 @@ document.getElementById("startButton").addEventListener("click", function() {
 });
 
 let playerTeam = null;
-let wins = 0;
-let losses = 0;
+const stats = getStats();
+let wins = stats.wins;
+let losses = stats.losses;
+updateScoreboard();
+
 
 document.getElementById("rockButton").addEventListener("click", () => selectTeam(ROCK));
 document.getElementById("paperButton").addEventListener("click", () => selectTeam(PAPER));
