@@ -1,5 +1,17 @@
 let gameInterval;
 
+// Get randomness
+function getRandomInt(min, max) {
+    const byteArray = new Uint32Array(1);
+    crypto.getRandomValues(byteArray);
+    const range = max - min + 1;
+    const maxRange = 4294967295; // Maximum value for Uint32Array
+    if (byteArray[0] >= Math.floor(maxRange / range) * range) {
+        return getRandomInt(min, max);
+    }
+    return min + (byteArray[0] % range);
+}
+
 // Game constants
 const ROCK = "rock";
 const PAPER = "paper";
@@ -22,7 +34,7 @@ class Minion {
     }
 
     move(width, height) {
-        const direction = ["up", "down", "left", "right"][Math.floor(Math.random() * 4)];
+        const direction = ["up", "down", "left", "right"][getRandomInt(0, 3)];
         if (direction === "up" && this.y > 0) this.y--;
         else if (direction === "down" && this.y < height - 1) this.y++;
         else if (direction === "left" && this.x > 0) this.x--;
@@ -147,6 +159,10 @@ function updateScoreboard() {
 }
 
 const socket = io();
+socket.on('gameData', (minions) => {
+    // Use the 'minions' data received from the server to start the game
+    startGame(minions);
+});
 
 function gameTick(ctx, width, height) {
     for (const minion of minions) {
