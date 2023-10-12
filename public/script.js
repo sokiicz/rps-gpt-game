@@ -237,7 +237,9 @@ function selectTeam(team) {
 let isGameRunning = false;
 
 window.addEventListener("beforeunload", function (e) {
-    var confirmationMessage = "Are you sure you want to leave the game?";
+    updateLossCount();
+    var confirmationMessage = "If you refresh or leave, it will be counted as a loss. Are you sure?";
     e.returnValue = confirmationMessage;
     return confirmationMessage;
 });
+
