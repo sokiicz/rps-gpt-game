@@ -19,6 +19,10 @@ function updateLossCount() {
     updateScoreboard();  // Assuming you have this function to update the scoreboard
 }
 
+const stats = getStats();
+let wins = stats.wins;
+let losses = stats.losses;
+updateScoreboard();
 
 // Get randomness
 function getRandomInt(min, max) {
@@ -161,10 +165,7 @@ document.getElementById("startButton").addEventListener("click", function() {
 });
 
 let playerTeam = null;
-const stats = getStats();
-let wins = stats.wins;
-let losses = stats.losses;
-updateScoreboard();
+
 
 
 document.getElementById("rockButton").addEventListener("click", () => selectTeam(ROCK));
