@@ -183,6 +183,19 @@ function updateScoreboard() {
 }
 
 const socket = io();
+socket.on('startGame', (gameId) => {
+    // The game is starting, you can now initialize the game state
+    // For now, just print the game ID
+    console.log("Game starting with ID:", gameId);
+    socket.emit('requestGameState', gameId);
+});
+socket.on('updateGameState', (minions) => {
+    // Update the local game state and redraw the game
+    window.minions = minions;
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    drawGame(ctx);
+});
 socket.on('gameData', (minions) => {
     // Use the 'minions' data received from the server to start the game
     startGame(minions);
