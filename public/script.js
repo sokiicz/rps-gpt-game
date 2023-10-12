@@ -102,6 +102,9 @@ function gameTick(ctx, width, height) {
 
 // Event listener for the start button
 document.getElementById("startButton").addEventListener("click", function() {
+        if (isGameRunning) {
+        return;
+    }
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
     const width = canvas.width / CELL_SIZE;
@@ -112,6 +115,13 @@ document.getElementById("startButton").addEventListener("click", function() {
     initializeMinions(width, height, 10);
     clearInterval(gameInterval);  // Clear any existing game interval
     gameInterval = setInterval(() => gameTick(ctx, width, height), 100);
+
+    // Disable team buttons
+    const teamButtons = document.querySelectorAll('.team-button');
+    teamButtons.forEach(button => {
+        button.disabled = true;
+    });
+    isGameRunning = true;
 });
 
 let playerTeam = null;
@@ -125,6 +135,7 @@ document.getElementById("scissorsButton").addEventListener("click", () => select
 function selectTeam(team) {
     playerTeam = team;
     document.getElementById("startButton").disabled = false; // Enable the start button once a team is selected
+    socket.emit('selectTeam', team);
 }
 
 function updateScoreboard() {
@@ -156,7 +167,14 @@ function gameTick(ctx, width, height) {
         
         // Disable further gameTicks after the game ends
         clearInterval(gameInterval);
-    }
+            
+        // Re-enable team buttons
+    const teamButtons = document.querySelectorAll('.team-button');
+    teamButtons.forEach(button => {
+        button.disabled = false;
+    });
+    isGameRunning = false;
+}
 }
 
 function resetTeamButtons() {
@@ -171,3 +189,6 @@ function selectTeam(team) {
     document.getElementById(team + "Button").classList.add("selected");
     document.getElementById("startButton").disabled = false; // Enable the start button once a team is selected
 }
+
+let isGameRunning = false;
+
