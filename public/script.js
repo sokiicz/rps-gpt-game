@@ -102,6 +102,10 @@ function gameTick(ctx, width, height) {
 
 // Event listener for the start button
 document.getElementById("startButton").addEventListener("click", function() {
+    if (!playerTeam) {
+        alert("Please select a team before starting the game.");
+        return;
+    }
         if (isGameRunning) {
         return;
     }
