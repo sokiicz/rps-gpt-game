@@ -12,17 +12,17 @@ function setStats(wins, losses) {
     localStorage.setItem('rpsStats', JSON.stringify({ wins, losses }));
 }
 
+const stats = getStats();
+let wins = stats.wins;
+let losses = stats.losses;
+updateScoreboard();
+
 function updateLossCount() {
     const stats = getStats();
     stats.losses += 1;
     setStats(stats.wins, stats.losses);
     updateScoreboard();  // Assuming you have this function to update the scoreboard
 }
-
-const stats = getStats();
-let wins = stats.wins;
-let losses = stats.losses;
-updateScoreboard();
 
 // Get randomness
 function getRandomInt(min, max) {
