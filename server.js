@@ -38,7 +38,7 @@ io.on('connection', (socket) => {
     });    
     
     console.log('A user connected');
-    
+
 let player = {
     id: socket.id,
     team: null
@@ -57,3 +57,13 @@ players = players.filter(p => p.id !== socket.id);
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests, please try again later."
+});
+
+app.use(limiter);
